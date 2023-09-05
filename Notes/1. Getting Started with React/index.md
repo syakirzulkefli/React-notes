@@ -2,7 +2,7 @@
 
 Vanilla Js means plain text js when there is no third party library or tools.
 
-![Alt text](image.png)
+![Alt text](../Images/image.png)
 
 node -v on terminal to check the node version
 ctrl ` to open and close terminal in vscode
@@ -13,12 +13,12 @@ ctrl ` to open and close terminal in vscode
 1. Create React App(CRA)
 2. Vite
 
-![Alt text](image-1.png)
+![Alt text](../Images/image-1.png)
 
 ## Creating a React components
  App.tsx is app component
 
-![Alt text](image-2.png)
+![Alt text](../Images/image-2.png)
 
 hmr means Hot Module Replacement
 vite monitor for our changes
@@ -54,20 +54,20 @@ export default App;
 * App.tsx being the root or parent component, Message.tsx being the tree or child.
 * Then React take this component tree and build Js data structure called Virtual DOM. This DOM differ from the actual DOM in the browser. It is lightweight and in memory representation of our component tree and each node represent a component and its properties.
 
-![Alt text](image-3.png)
+![Alt text](../Images/image-3.png)
 
 * When the state or data of our component changes,React updates the corresponding nodes in the Virtual DOM to a new state then compares the current version of the virtual DOM with previous version to identify the nodes that should be updated. 
 * It will then updates the nodes in the actual DOM. This process will be done by React DOM(can see in package.json>dependencies - 2 libraries that are react and react-dom).
 
-![Alt text](image-4.png)
+![Alt text](../Images/image-4.png)
 
 ## React Ecosystem
 
-![Alt text](image-5.png)
+![Alt text](../Images/image-5.png))
 
-![Alt text](image-6.png)
+![Alt text](../Images/image-6.png)
 
-![Alt text](image-7.png)
+![Alt text](../Images/image-7.png)
 
 Library is like a tool and framework is like a toolset.
 

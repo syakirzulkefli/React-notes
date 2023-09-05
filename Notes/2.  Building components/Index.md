@@ -1,6 +1,6 @@
 # Building Components (!important)
 
-![Alt text](image.png)
+![Alt text](../Images/image-11.png)
 
 ## Creating a listgroup components
 
@@ -17,7 +17,7 @@
 
 - In react, a component cant return more than 1 element. If we want to add more,wrap into a div component
 
-![Alt text](image-1.png)
+![Alt text](../Images/image-12.png)
 
 But this way we add unnecessary elements just to make react happy.
 
@@ -53,7 +53,7 @@ In JSX inly allowed to use HTML or React component,so use { } to add Js syntax.
 
 Warning on key prop.Should have key=value pair
 
-![Alt text](image-2.png)
+![Alt text](../Images/image-13.png)
 
 ```
 ListGroup.tsx
@@ -203,7 +203,7 @@ ListGroup.tsx
       {items.length === 0 && <p>No item found</p>} //better syntax
 ```
 
-![Alt text](image-3.png)
+![Alt text](../Images/image-14.png)
 
 - This one means that if the condition is true,the result of the entire expression will be printed. If false,all the entire expression will be false and nothing will be rendered in the screen.So by this way we dont have to include : null in our code.
 
@@ -267,16 +267,16 @@ export default ListGroup;
 ```
 
 Output:
-![Alt text](image-4.png)
+![Alt text](../Images/image-15.png)
 
 by changing console.log('Clicked') to console.log(item the output would be like this)
 
-![Alt text](image-5.png)
+![Alt text](../Images/image-16.png)
 
 We can also add event to onClick={(event) => console.log(event)}
 
 Output:
-![Alt text](image-6.png)
+![Alt text](../Images/image-17.png)
 
 Type Annotation in Ts
 
