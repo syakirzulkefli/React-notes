@@ -361,9 +361,9 @@ ListGroup.tsx
 
 import {useState } from "react";
 
-// { items: [], heading: string}
+// { items: [], heading: string} //interface is one of the Ts features
 interface Props {
-  items: string[];
+  items: string[]; //we define various properties and their types
   heading: string;
 }
 
@@ -415,5 +415,244 @@ function App() {
 export default App;
 
 ```
-
 ## Passing Functions via Props
+
+So something should happen when we click an item.
+
+```
+App.tsx
+
+import ListGroup from "./components/ListGroup"; //need to import first
+
+function App() {
+  let items = ["New York", "San Fransisco", "Tokyo", "London", "Paris"];
+
+  const handleSelectItem = (item: string) => {
+    console.log(item);
+  };
+
+  return (
+    <div>
+      <ListGroup
+        items={items}
+        heading="Cities"
+        onSelectItem={handleSelectItem}
+      />
+    </div>
+  );
+}
+
+export default App;
+```
+
+```
+ListGroup.tsx
+
+import { useState } from "react";
+
+// { items: [], heading: string}
+interface Props {
+  items: string[];
+  heading: string;
+  // (item: string) => void
+  onSelectItem: (item: string) => void;
+}
+
+function ListGroup({ items, heading, onSelectItem }: Props) {
+  //Hook is features allows us to tap in features that have been built in React
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+
+  return (
+    <>
+      <h1>{heading}</h1>
+      {items.length === 0 && <p>No item found</p>}
+      <ul className="list-group">
+        {items.map((item, index) => (
+          <li
+            className={
+              selectedIndex === index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
+            key={item}
+            onClick={() => {
+              setSelectedIndex(index);
+              onSelectItem(item);
+            }}
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+export default ListGroup;
+```
+
+## State vs Props
+
+![Alt text](../Images/image-18.png)
+
+## Passing Children
+
+instead of defining function (){}
+
+and export default; 
+
+use **rafce** keyword to automatically generate function export syntax
+
+```
+Alert.tsx
+
+import { ReactNode } from "react";
+
+interface Props{
+    children: ReactNode;
+}
+
+const Alert = ({children} : Props) => {
+  return (
+    <div className="alert alert-primary">{children}</div>
+  )
+}
+
+export default Alert
+```
+
+```
+App.tsx
+
+import Alert from "./components/Alert";
+
+function App() {
+  return (
+    <div>
+      <Alert>
+        Hello World
+      </Alert>
+    </div>
+  );
+}
+
+export default App;
+```
+## Inspecting with React Dev Tools
+
+## Exercise: Building a button component
+
+Interface to make our components dynamic
+
+1. Import the layout from bootstrap
+2. make the button dynamic
+3. handle the event
+
+add ? to Props to tell Ts that the property is optional
+
+```
+Button.tsx
+
+import { ReactNode } from "react";
+
+interface Props{
+    children: ReactNode;
+    color?: 'primary' | 'secondary' | 'success'; // | is union operator
+    onClick: () => void; 
+}
+
+const Button = ({children, onClick, color='primary'} : Props) => {
+  return (
+    <button className={"btn btn-" + color} onClick={onClick}>{children}</button>
+  )
+}
+
+export default Button
+```
+
+```
+App.tsx
+
+import Button from "./components/Button";
+
+function App() {
+  return (
+    <div>
+      <Button  onClick={() => console.log('Clicked')}>
+        Please Sign Up
+      </Button>
+    </div>
+  );
+}
+
+export default App;
+
+```
+
+## Exercise: Showing an alert
+
+```
+Button.tsx
+
+import { ReactNode } from "react";
+
+interface Props{
+    children: ReactNode;
+    color?: 'primary' | 'secondary' | 'success'; // | is union operator
+    onClick: () => void; 
+}
+
+const Button = ({children, onClick, color='primary'} : Props) => {
+  return (
+    <button className={"btn btn-" + color} onClick={onClick}>{children}</button>
+  )
+}
+
+export default Button
+```
+
+```
+Alert.tsx
+
+import { ReactNode } from "react";
+
+interface Props{
+    children: ReactNode;
+    onClose: () => void; //function with no parameter that return void
+}
+
+const Alert = ({children, onClose} : Props) => {
+  return (
+    <div 
+    className="alert alert-primary alert-dismissible">{children}
+    <button type="button" className="btn-close" onClick={onClose} data-bs-dismiss="alert" aria-label="Close"></button>
+    
+    </div>
+  )
+}
+
+export default Alert
+```
+
+```
+App.tsx
+
+import { useState } from "react";
+import Alert from "./components/Alert";
+import Button from "./components/Button";
+
+function App() {
+  const [alertVisible, setAlertVisibility] = useState(false);
+
+  return (
+    <div>
+      {alertVisible && <Alert onClose={() => setAlertVisibility(false)}>My Alert</Alert>}
+      <Button onClick={() => setAlertVisibility(true)}>Please Sign Up</Button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+
