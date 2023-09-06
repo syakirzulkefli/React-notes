@@ -1,8 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// Determine the current module's directory and use it as the base for aliases
-const __dirname = new URL('.', import.meta.url).pathname;
+const __dirname = import.meta.url;
 
 export default defineConfig({
   plugins: [react()],
