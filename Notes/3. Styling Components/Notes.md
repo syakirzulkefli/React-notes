@@ -1,6 +1,6 @@
 # Styling Components
 
-![Alt text](image-19.png)
+![Alt text](../Images/image-19.png)
 
 ## Vanilla CSS
 
@@ -101,9 +101,9 @@ export default ListGroup;
 ## CSS In Js
 
 can write css in Ts or Js
-![Alt text](image.png)
+![Alt text](../Images/image-21.png)
 
-![Alt text](image.png)
+![Alt text](../Images/image-20.png)
 
 ## Separation of Concerns
 
@@ -164,6 +164,3 @@ function App() {
 
 export default App;
 ```
-
-
-
