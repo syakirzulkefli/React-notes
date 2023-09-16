@@ -1,13 +1,9 @@
-import Form from './components/Form';
+import Message from "./Message";
 
 function App() {
-
-
-  return (
-    <div>
-      <Form />
-    </div>
-  );
+  return <div>
+    <Message/>
+  </div>
 }
 
 export default App;

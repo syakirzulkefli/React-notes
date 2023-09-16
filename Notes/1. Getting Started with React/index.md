@@ -1,80 +1,112 @@
-## What is react?
+## **What is React?**
 
-Vanilla Js means plain text js when there is no third party library or tools.
+- React is a JavaScript library for building dynamic and interactive UI.
 
-![Alt text](../Images/image.png)
+- Created by FB in 2011
 
-node -v on terminal to check the node version
-ctrl ` to open and close terminal in vscode
+- Why was React created?
+  When a webpages is loaded in a browser, the browser takes the HTML code and create a tree-like structure called the Document Object Model (DOM). This allows us to use Js to change the page content in response to user action.
+  ![Alt text](../Images/image-9.png)
 
-## Creating React app (packages)
+- For example, we can use Js to hide an element when button is clicked. Also called Vanilla Js meaning plain Js code without any third party library.
+  ![Alt text](../Images/image-1.png)
 
-2 ways :
+- So as our apps grow, working with DOM is challenged and that comes React to solve.
+
+- When we use React, we no longer use Vanilla Js. With React we no longer need to worry about querying and updating DOM element.
+  ![Alt text](../Images/image-2.png)
+
+- Instead we describe a webpage using small and reusable components and React will take care efficiently creating and updating elements.
+  ![Alt text](../Images/image-3.png)
+
+- We build components individually and independent.
+  ![Alt text](../Images/image-4.png)
+
+## **Creating React app (packages)**
+
+There are 2 ways to create React :
+
 1. Create React App(CRA)
 2. Vite
 
-![Alt text](../Images/image-1.png)
+## **Project Structure**
 
-## Creating a React components
- App.tsx is app component
+- node_modules folder : this is where all the third party libraries like React and other tools are installed.
+- public folder : this is where our public asset of our app is stored like images,videos and so on.
+- src folder : source code of our application.
+- index.html file : Basic HTML template
+- package.json : information about our project.
+- tsconfig.json : a bunch of setting for telling the Ts compiler how to compile our code to Js.
+- vite.config.ts : configuration file for vite.
 
-![Alt text](../Images/image-2.png)
+## **Creating a React Components**
 
-hmr means Hot Module Replacement
-vite monitor for our changes
+- There are 2 ways to create a React component, either by Js class or function.
+- Declare a function named message. Use PascalCasing for the components name.
 
 ```
-Message.tsx
-
-function Message() { //pascalCasing
-    const name = 'Syakir';
-     return <h1>Hello {name}</h1>; //This is not HTML code,but JSX: Javascript XML.This code will be converted to Js code,head over to babeljs.io to find out more.
-     //{ } we can write any Js Expressions inside the curly braces
+function Message (){
 
 }
-
-export default Message;
 ```
 
+- Then, we should describe what the component should look like when we use this component. For example we want to display H1 element and some text. So we write:
+
 ```
-App.tsx
+function Message() {
+    const name = 'Syakir';
+     return <h1>Hello {name}</h1>;
+}
 
-import Message from "./Message"; //need to import first
+export default Message; //export as default object on this module
+```
 
+- `return <h1>Hello {name}</h1>;` is not HTML code,but JSX that stands for Javascript XML. This code will be converted to Js code. Head over to babeljs.io to find out more.
+- We can write any Js Expressions inside the curly braces `{ }`
+- Now, in App.tsx, we define a function
+
+```
+function () {
+  return <div><div/>
+  
+}
+```
+
+- Then let say we want to have a div and inside the div we want to have our message component.
+
+```
+import Message from "./Message";
 
 function App() {
-  return <div><Message/></div>
+  return <div>
+    <Message/>
+  </div>
 }
 
 export default App;
-
 ```
 
-## How React Works
-* App.tsx being the root or parent component, Message.tsx being the tree or child.
-* Then React take this component tree and build Js data structure called Virtual DOM. This DOM differ from the actual DOM in the browser. It is lightweight and in memory representation of our component tree and each node represent a component and its properties.
+## **How React Works**
+
+- Component like App.tsx being the root or parent component, component like Message.tsx being the tree or child.
+- Then React take this component tree and build Js data structure called Virtual DOM. This DOM differ from the actual DOM in the browser. It is lightweight and in memory representation of our component tree and each node represent a component and its properties.
 
 ![Alt text](../Images/image-3.png)
 
-* When the state or data of our component changes,React updates the corresponding nodes in the Virtual DOM to a new state then compares the current version of the virtual DOM with previous version to identify the nodes that should be updated. 
-* It will then updates the nodes in the actual DOM. This process will be done by React DOM(can see in package.json>dependencies - 2 libraries that are react and react-dom).
+- When the state or data of our component changes, React updates the corresponding nodes in the Virtual DOM to a new state then compares the current version of the virtual DOM with previous version to identify the nodes that should be updated. (This is monitored by vite)
+- It will then updates the nodes in the actual DOM. This process will be done by React DOM(can see in package.json>dependencies - 2 libraries that are react and react-dom).
 
 ![Alt text](../Images/image-4.png)
 
-## React Ecosystem
+## **React Ecosystem**
 
-![Alt text](../Images/image-5.png))
-
+![Alt text](../Images/image-5.png)
 ![Alt text](../Images/image-6.png)
+
+- Library is like a tool, and frameworks is like a toolset
+
+- The only thing React good is creating a dynamic and interacting UI
 
 ![Alt text](../Images/image-7.png)
 
-Library is like a tool and framework is like a toolset.
-
-React to create a dynamic and interacting UI
-
-
-
-
-
-
+- Later on will cover third party library in React Ecosystem.
