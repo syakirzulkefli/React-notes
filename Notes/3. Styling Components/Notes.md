@@ -1,36 +1,9 @@
-# Styling Components
+# **Styling Components**
+![Alt text](../Images/image-10.png)
 
-![Alt text](../Images/image-19.png)
-
-## Vanilla CSS
-
-```
-App.tsx
-
-import ListGroup from "./components/ListGroup/ListGroup"; //need to import first
-
-// this is quite ugly so we create index file in this folder.
-```
-
-```
-index.ts
-
-import ListGroup from "./ListGroup";
-
-export default ListGroup;
-
-//import list group and export as an object
-
-```
-
-so in App.tsx would be like this
-
-import ListGroup from "./components/ListGroup"; //need to import first
-
-we just simply refer to ListGroup folder without referencing to file because the compiler will look for index file.
-
-we write all the styles in css files and then imported it on the top of the component file
-
+## **Vanilla CSS**
+* Remove any third party library from main.tsx
+* 
 ## CSS modules
 
 in css modules all className are stored locally. Cannot access from outside. 

@@ -1,6 +1,6 @@
-# Introduction
+# **Introduction**
 
-## Understanding the state hooks
+## **Understanding The State Hooks**
 State hook used to add state to a component
 * React updates state asynchronously(meaning not immediately)(for perfomamnce reason)
 * State is stored outside of components in memory
