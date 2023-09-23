@@ -1,67 +1,49 @@
-# Introduction
-* React Hook Forms for managing form state
-* Zod for data validation
+# **Introduction**
 
-## Building a form
+- React Hook Forms for managing form state
+- Zod for data validation
+  ![Alt text](image.png)
+
+## **Building a Form**
 
 ```
 Form.tsx
-
-import React from "react";
 
 const Form = () => {
   return (
     <form>
       <div className="mb-3">
-        <label htmlFor="" className="form-label">
+        <label htmlFor="name" className="form-label">
           Name
         </label>
         <input id="name" type="text" className="form-control" />
       </div>
       <div className="mb-3">
-        <label htmlFor="age" className="form-label">Age</label>
+        <label htmlFor="age" className="form-label">
+          Age
+        </label>
         <input id="age" type="number" className="form-control" />
       </div>
-      <button className="btn btn-primary" type='submit'>Submit</button>
+      <button className="btn btn-primary" type="submit">
+        Submit
+      </button>
     </form>
   );
 };
 
 export default Form;
-```
 
-```
-index.css
-
-body {
-    padding: 20px;
-}
-```
-
-```
-main.tsx
-
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import 'bootstrap/dist/css/bootstrap.css'
-import './index.css'
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+//div.mb-3>label.form-label+input.form-control
+//div.mb-3>label.form-label+input[type=number].form-control
+//button.btn.btn-primary
 ```
 
 ```
 App.tsx
 
-import Form from './components/Form';
+import Form from "./components/Form";
 
 function App() {
-
-
   return (
     <div>
       <Form />
@@ -72,23 +54,20 @@ function App() {
 export default App;
 ```
 
-## Handling Form Submission
+## **Handling Form Submission**
 
 ```
-Form.tsx
-
-import React, { FormEvent } from "react";
+import { FormEvent } from "react";
 
 const Form = () => {
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     console.log("Submitted");
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
-        <label htmlFor="" className="form-label">
+        <label htmlFor="name" className="form-label">
           Name
         </label>
         <input id="name" type="text" className="form-control" />
@@ -109,12 +88,10 @@ const Form = () => {
 export default Form;
 ```
 
-## Accessing Input Fields
+## **Accessing Input Fields**
 
 ```
-Form.tsx
-
-import React, { FormEvent, useRef } from "react";
+import { FormEvent, useRef } from "react";
 
 const Form = () => {
   const nameRef = useRef<HTMLInputElement>(null);
@@ -127,11 +104,10 @@ const Form = () => {
     if (ageRef.current !== null) person.age = parseInt(ageRef.current.value);
     console.log(person);
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
-        <label htmlFor="" className="form-label">
+        <label htmlFor="name" className="form-label">
           Name
         </label>
         <input ref={nameRef} id="name" type="text" className="form-control" />
@@ -152,28 +128,24 @@ const Form = () => {
 export default Form;
 ```
 
-## Controlled Components
+## **Controlled Components**
 
 ```
-form.tsx
-
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 
 const Form = () => {
   const [person, setPerson] = useState({
     name: "",
     age: "",
   });
-
   const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
+    event.preventDefault;
     console.log(person);
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
-        <label htmlFor="" className="form-label">
+        <label htmlFor="name" className="form-label">
           Name
         </label>
         <input
@@ -210,27 +182,23 @@ const Form = () => {
 export default Form;
 ```
 
-## Managing forms with react hook form
+## **Managing Forms With React Hook Form**
 
 ```
-Form.tsx
-
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValue, FieldValues, useForm } from "react-hook-form";
 
 const Form = () => {
-  const {register,handleSubmit}= useForm();
-
+  const { register, handleSubmit } = useForm();
   const onSubmit = (data: FieldValues) => console.log(data);
-  
-  
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-3">
-        <label htmlFor="" className="form-label">
+        <label htmlFor="name" className="form-label">
           Name
         </label>
         <input
-          {...register ('name')}
+          {...register("name")}
           id="name"
           type="text"
           className="form-control"
@@ -241,7 +209,7 @@ const Form = () => {
           Age
         </label>
         <input
-          {...register('age')}
+          {...register("age")}
           id="age"
           type="number"
           className="form-control"
@@ -257,16 +225,14 @@ const Form = () => {
 export default Form;
 ```
 
-## Applying Validation
+## **Applying Validation**
 
 ```
-Form.tsx
-
 import { FieldValues, useForm } from "react-hook-form";
 
 interface FormData {
   name: string;
-  age: number;
+  number: number;
 }
 
 const Form = () => {
@@ -275,17 +241,16 @@ const Form = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-
   const onSubmit = (data: FieldValues) => console.log(data);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-3">
-        <label htmlFor="" className="form-label">
+        <label htmlFor="name" className="form-label">
           Name
         </label>
         <input
-          {...register("name", { required: true, minLength: 3 })}
+          {...(register("name"), { required: true, minLength: 3 })}
           id="name"
           type="text"
           className="form-control"
@@ -318,25 +283,18 @@ const Form = () => {
 export default Form;
 ```
 
-## Schema-Based Validation with Zod
+## **Schema-Based Validation with Zod**
 
-![Alt text](../Images/image-29.png)
-
-Refer to zod.dev
-
+![Alt text](../Images/image-37.png)
 
 ```
-From.tsx
-
 import { FieldValues, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const schema = z.object({
-  name: z.string().min(3, { message: "Name must be at least 3 characters." }),
-  age: z
-    .number({ invalid_type_error: "Age field is required." })
-    .min(18, { message: "Age must be at least 18." }),
+  name: z.string().min(3),
+  age: z.number({ invalid_type_error: "Age field is required" }).min(18),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -347,13 +305,12 @@ const Form = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
-
   const onSubmit = (data: FieldValues) => console.log(data);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-3">
-        <label htmlFor="" className="form-label">
+        <label htmlFor="name" className="form-label">
           Name
         </label>
         <input
@@ -385,19 +342,17 @@ const Form = () => {
 
 export default Form;
 ```
-## Disabling the submit button
-```
-Form.tsx
 
+## **Disabling The Submit Button**
+
+```
 import { FieldValues, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const schema = z.object({
-  name: z.string().min(3, { message: "Name must be at least 3 characters." }),
-  age: z
-    .number({ invalid_type_error: "Age field is required." })
-    .min(18, { message: "Age must be at least 18." }),
+  name: z.string().min(3),
+  age: z.number({ invalid_type_error: "Age field is required" }).min(18),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -408,13 +363,12 @@ const Form = () => {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
-
   const onSubmit = (data: FieldValues) => console.log(data);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-3">
-        <label htmlFor="" className="form-label">
+        <label htmlFor="name" className="form-label">
           Name
         </label>
         <input
@@ -445,5 +399,576 @@ const Form = () => {
 };
 
 export default Form;
+```
 
+## **Project Expense Tracker**
+
+```
+interface Expense {
+  id: number;
+  description: string;
+  amount: number;
+  category: string;
+}
+interface Props {
+  expenses: Expense[];
+  onDelete: (id: number) => void;
+}
+
+const ExpenseList = ({ expenses, onDelete }: Props) => {
+  if (expenses.length === 0) return null;
+  return (
+    <table className="table table-bordered">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Category</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {expenses.map((expense) => (
+          <tr key={expense.id}>
+            <td>{expense.description}</td>
+            <td>{expense.amount}</td>
+            <td>{expense.category}</td>
+            <td>
+              <button
+                className="btn btn-outline-danger"
+                onClick={() => onDelete(expense.id)}
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          <td>
+            $
+            {expenses
+              .reduce((acc, expense) => expense.amount + acc, 0)
+              .toFixed(2)}
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+  );
+};
+
+export default ExpenseList;
+```
+
+```
+import { useState } from "react";
+import ExpenseList from "./expense-tracker/components/ExpenseList";
+
+function App() {
+  const [expenses, setExpenses] = useState([
+    { id: 1, description: "aaa", amount: 10, category: "Utilities" },
+    { id: 2, description: "bbb", amount: 20, category: "Utilities" },
+    { id: 3, description: "ccc", amount: 30, category: "Utilities" },
+    { id: 4, description: "ddd", amount: 40, category: "Utilities" },
+  ]);
+
+  return (
+    <div>
+      <ExpenseList
+        expenses={expenses}
+        onDelete={(id) => setExpenses(expenses.filter((e) => e.id !== id))}
+      />
+    </div>
+  );
+}
+
+export default App;
+```
+
+## **Building Expense Filter**
+
+```
+interface Props {
+  onSelectCategory: (category: string) => void;
+}
+
+const ExpenseFIlter = ({ onSelectCategory }: Props) => {
+  return (
+    <select
+      className="form-select"
+      onChange={(event) => onSelectCategory(event.target.value)}
+    >
+      <option value="">All categories</option>
+      <option value="Groceries">Groceries</option>
+      <option value="Utilities ">Utilities </option>
+      <option value="Entertainment">Entertainment</option>
+    </select>
+  );
+};
+
+export default ExpenseFIlter;
+```
+
+```
+import { useState } from "react";
+import ExpenseList from "./expense-tracker/components/ExpenseList";
+import ExpenseFIlter from "./expense-tracker/components/ExpenseFIlter";
+
+function App() {
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [expenses, setExpenses] = useState([
+    { id: 1, description: "aaa", amount: 10, category: "Utilities" },
+    { id: 2, description: "bbb", amount: 20, category: "Utilities" },
+    { id: 3, description: "ccc", amount: 30, category: "Utilities" },
+    { id: 4, description: "ddd", amount: 40, category: "Utilities" },
+  ]);
+
+  const visibleExpenses = selectedCategory
+    ? expenses.filter((e) => e.category === selectedCategory)
+    : expenses;
+  return (
+    <div>
+      <div className="mb-3">
+        <ExpenseFIlter
+          onSelectCategory={(category) => setSelectedCategory(category)}
+        />
+      </div>
+      <ExpenseList
+        expenses={visibleExpenses}
+        onDelete={(id) => setExpenses(expenses.filter((e) => e.id !== id))}
+      />
+    </div>
+  );
+}
+
+export default App;
+```
+
+## **Building The Expense Form**
+
+```
+import { categories } from "../../App";
+
+const ExpenseForm = () => {
+  return (
+    <form>
+      <div className="mb-3">
+        <label htmlFor="description" className="form-label">
+          Description
+        </label>
+        <input id="description" type="text" className="form-control" />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="amount" className="form-label">
+          Amount
+        </label>
+        <input id="amount" type="number" className="form-control" />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="category" className="form-label">
+          Category
+        </label>
+        <select id="category" className="form-select">
+          <option value=""></option>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+      </div>
+      <button className="btn-primary">Submit</button>
+    </form>
+  );
+};
+
+export default ExpenseForm;
+```
+
+```
+import { categories } from "../../App";
+
+interface Props {
+  onSelectCategory: (category: string) => void;
+}
+
+const ExpenseFilter = ({ onSelectCategory }: Props) => {
+  return (
+    <select
+      className="form-select"
+      onChange={(event) => onSelectCategory(event.target.value)}
+    >
+      <option value="">All categories</option>
+      {categories.map((category) => (
+        <option key={category} value={category}>
+          {category}
+        </option>
+      ))}
+    </select>
+  );
+};
+
+export default ExpenseFilter;
+```
+
+```
+import { useState } from "react";
+import ExpenseList from "./expense-tracker/components/ExpenseList";
+import ExpenseFilter from "./expense-tracker/components/ExpenseFIlter";
+import ExpenseForm from "./expense-tracker/components/ExpenseForm";
+
+export const categories = ["Groceries", "Utilities", "Entertainment"];
+
+function App() {
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [expenses, setExpenses] = useState([
+    { id: 1, description: "aaa", amount: 10, category: "Utilities" },
+    { id: 2, description: "bbb", amount: 20, category: "Utilities" },
+    { id: 3, description: "ccc", amount: 30, category: "Utilities" },
+    { id: 4, description: "ddd", amount: 40, category: "Utilities" },
+  ]);
+
+  const visibleExpenses = selectedCategory
+    ? expenses.filter((e) => e.category === selectedCategory)
+    : expenses;
+  return (
+    <div>
+      <div className="mb-5">
+        <ExpenseForm />
+      </div>
+      <div className="mb-3">
+        <ExpenseFilter
+          onSelectCategory={(category) => setSelectedCategory(category)}
+        />
+      </div>
+      <ExpenseList
+        expenses={visibleExpenses}
+        onDelete={(id) => setExpenses(expenses.filter((e) => e.id !== id))}
+      />
+    </div>
+  );
+}
+
+export default App;
+```
+
+## **Integrating React Hook Form and Zod**
+
+```
+import categories from "../categories";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const schema = z.object({
+  description: z
+    .string()
+    .min(3, { message: "Description should be at least 3 characters" })
+    .max(50),
+  amount: z
+    .number({ invalid_type_error: "Amount is required" })
+    .min(0.01)
+    .max(100_000),
+  category: z.enum(categories, {
+    errorMap: () => ({ message: "Category is required." }),
+  }),
+});
+
+type ExpenseFormData = z.infer<typeof schema>;
+
+const ExpenseForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ExpenseFormData>({ resolver: zodResolver(schema) });
+  return (
+    <form onSubmit={handleSubmit((data) => console.log(data))}>
+      <div className="mb-3">
+        <label htmlFor="description" className="form-label">
+          Description
+        </label>
+        <input
+          {...register("description")}
+          id="description"
+          type="text"
+          className="form-control"
+        />
+        {errors.description && (
+          <p className="text-danger">{errors.description.message}</p>
+        )}
+      </div>
+      <div className="mb-3">
+        <label htmlFor="amount" className="form-label">
+          Amount
+        </label>
+        <input
+          {...register("amount", { valueAsNumber: true })}
+          id="amount"
+          type="number"
+          className="form-control"
+        />
+        {errors.amount && (
+          <p className="text-danger">{errors.amount.message}</p>
+        )}
+      </div>
+      <div className="mb-3">
+        <label htmlFor="category" className="form-label">
+          Category
+        </label>
+        <select {...register("category")} id="category" className="form-select">
+          <option value=""></option>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+        {errors.category && (
+          <p className="text-danger">{errors.category.message}</p>
+        )}
+      </div>
+      <button className="btn-primary">Submit</button>
+    </form>
+  );
+};
+
+export default ExpenseForm;
+```
+
+```
+import categories  from "../categories";
+
+interface Props {
+  onSelectCategory: (category: string) => void;
+}
+
+const ExpenseFilter = ({ onSelectCategory }: Props) => {
+  return (
+    <select
+      className="form-select"
+      onChange={(event) => onSelectCategory(event.target.value)}
+    >
+      <option value="">All categories</option>
+      {categories.map((category) => (
+        <option key={category} value={category}>
+          {category}
+        </option>
+      ))}
+    </select>
+  );
+};
+
+export default ExpenseFilter;
+```
+
+```
+const categories = ["Groceries", "Utilities", "Entertainment"] as const;
+export default categories;
+```
+
+```
+import { useState } from "react";
+import ExpenseList from "./expense-tracker/components/ExpenseList";
+import ExpenseFilter from "./expense-tracker/components/ExpenseFIlter";
+import ExpenseForm from "./expense-tracker/components/ExpenseForm";
+
+function App() {
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [expenses, setExpenses] = useState([
+    { id: 1, description: "aaa", amount: 10, category: "Utilities" },
+    { id: 2, description: "bbb", amount: 20, category: "Utilities" },
+    { id: 3, description: "ccc", amount: 30, category: "Utilities" },
+    { id: 4, description: "ddd", amount: 40, category: "Utilities" },
+  ]);
+
+  const visibleExpenses = selectedCategory
+    ? expenses.filter((e) => e.category === selectedCategory)
+    : expenses;
+  return (
+    <div>
+      <div className="mb-5">
+        <ExpenseForm />
+      </div>
+      <div className="mb-3">
+        <ExpenseFilter
+          onSelectCategory={(category) => setSelectedCategory(category)}
+        />
+      </div>
+      <ExpenseList
+        expenses={visibleExpenses}
+        onDelete={(id) => setExpenses(expenses.filter((e) => e.id !== id))}
+      />
+    </div>
+  );
+}
+
+export default App;
+```
+
+## **Adding An Expense**
+
+```
+import categories from "../categories";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const schema = z.object({
+  description: z
+    .string()
+    .min(3, { message: "Description should be at least 3 characters" })
+    .max(50),
+  amount: z
+    .number({ invalid_type_error: "Amount is required" })
+    .min(0.01)
+    .max(100_000),
+  category: z.enum(categories, {
+    errorMap: () => ({ message: "Category is required." }),
+  }),
+});
+
+type ExpenseFormData = z.infer<typeof schema>;
+
+interface Props {
+  onSubmit: (data: ExpenseFormData) => void;
+}
+
+const ExpenseForm = ({ onSubmit }: Props) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<ExpenseFormData>({ resolver: zodResolver(schema) });
+  return (
+    <form
+      onSubmit={handleSubmit((data) => {
+        onSubmit(data);
+        reset();
+      })}
+    >
+      <div className="mb-3">
+        <label htmlFor="description" className="form-label">
+          Description
+        </label>
+        <input
+          {...register("description")}
+          id="description"
+          type="text"
+          className="form-control"
+        />
+        {errors.description && (
+          <p className="text-danger">{errors.description.message}</p>
+        )}
+      </div>
+      <div className="mb-3">
+        <label htmlFor="amount" className="form-label">
+          Amount
+        </label>
+        <input
+          {...register("amount", { valueAsNumber: true })}
+          id="amount"
+          type="number"
+          className="form-control"
+        />
+        {errors.amount && (
+          <p className="text-danger">{errors.amount.message}</p>
+        )}
+      </div>
+      <div className="mb-3">
+        <label htmlFor="category" className="form-label">
+          Category
+        </label>
+        <select {...register("category")} id="category" className="form-select">
+          <option value=""></option>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+        {errors.category && (
+          <p className="text-danger">{errors.category.message}</p>
+        )}
+      </div>
+      <button className="btn-primary">Submit</button>
+    </form>
+  );
+};
+
+export default ExpenseForm;
+```
+
+```
+import categories  from "../categories";
+
+interface Props {
+  onSelectCategory: (category: string) => void;
+}
+
+const ExpenseFilter = ({ onSelectCategory }: Props) => {
+  return (
+    <select
+      className="form-select"
+      onChange={(event) => onSelectCategory(event.target.value)}
+    >
+      <option value="">All categories</option>
+      {categories.map((category) => (
+        <option key={category} value={category}>
+          {category}
+        </option>
+      ))}
+    </select>
+  );
+};
+
+export default ExpenseFilter;
+```
+
+```
+import { useState } from "react";
+import ExpenseList from "./expense-tracker/components/ExpenseList";
+import ExpenseFilter from "./expense-tracker/components/ExpenseFIlter";
+import ExpenseForm from "./expense-tracker/components/ExpenseForm";
+
+function App() {
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [expenses, setExpenses] = useState([
+    { id: 1, description: "aaa", amount: 10, category: "Utilities" },
+    { id: 2, description: "bbb", amount: 20, category: "Utilities" },
+    { id: 3, description: "ccc", amount: 30, category: "Utilities" },
+    { id: 4, description: "ddd", amount: 40, category: "Utilities" },
+  ]);
+
+  const visibleExpenses = selectedCategory
+    ? expenses.filter((e) => e.category === selectedCategory)
+    : expenses;
+  return (
+    <div>
+      <div className="mb-5">
+        <ExpenseForm
+          onSubmit={(expense) =>
+            setExpenses([...expenses, { ...expense, id: expenses.length + 1 }])
+          }
+        />
+      </div>
+      <div className="mb-3">
+        <ExpenseFilter
+          onSelectCategory={(category) => setSelectedCategory(category)}
+        />
+      </div>
+      <ExpenseList
+        expenses={visibleExpenses}
+        onDelete={(id) => setExpenses(expenses.filter((e) => e.id !== id))}
+      />
+    </div>
+  );
+}
+
+export default App;
 ```
