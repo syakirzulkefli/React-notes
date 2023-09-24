@@ -2,7 +2,6 @@
 
 - React Hook Forms for managing form state
 - Zod for data validation
-  ![Alt text](image.png)
 
 ## **Building a Form**
 
