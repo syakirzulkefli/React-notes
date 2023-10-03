@@ -14,7 +14,7 @@
 import ListGroup from "./components/ListGroup";
 ```
 
-- Problem with Vanilla CSS is that when we have another stylesheet where we have CSS class with the same name, it will run into clashes. This can be solved by CSS Modules.
+- Problem with Vanilla CSS is that when we have another stylesheet where we have CSS class with the same name, it will run into clashes. This can be solved by CSS Modules. (Global Scope)
 
 ## **CSS Modules**
 
@@ -36,8 +36,8 @@ ListGroup.module.css
 }
 ```
 
-- If we want to add multiple class, we can wrap into array and use .join method. In this case we use join method with a space.
-  `<ul className={[styles.ListGroup, styles.container].joi `
+- If we want to add multiple class (import class dalam component), we can wrap into array and use .join method. In this case we use join method with a space.
+  `<ul className={[styles.ListGroup, styles.container].join `
 
 ```
 ListGroup.tsx

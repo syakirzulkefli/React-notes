@@ -5,6 +5,9 @@
 
 ## **Building a Form**
 
+`div.mb-3>label.form-label+input.form-control`
+
+`div.mb-3>label.form-label+input[type=number].form-control`
 ```
 Form.tsx
 
@@ -55,6 +58,7 @@ export default App;
 
 ## **Handling Form Submission**
 
+- by default when we use onSubmit button to submit a form, the form is posted to the server, so we get full page reload. to prevent this we use `preventDefault()` 
 ```
 import { FormEvent } from "react";
 
@@ -88,7 +92,7 @@ export default Form;
 ```
 
 ## **Accessing Input Fields**
-
+- use `useRef` to reference a DOM element. 
 ```
 import { FormEvent, useRef } from "react";
 
@@ -128,6 +132,9 @@ export default Form;
 ```
 
 ## **Controlled Components**
+- another way to get the value of input field in our form, by using state hook
+- use `event.target.value`
+- value property in event.target.value return string,so for number we call parseInt() property to convert from string to number
 
 ```
 import { FormEvent, useRef, useState } from "react";
@@ -182,6 +189,7 @@ export default Form;
 ```
 
 ## **Managing Forms With React Hook Form**
+- can quickly build forms with less code (compared to last style that have to use `onChange` and `value`)
 
 ```
 import { FieldValue, FieldValues, useForm } from "react-hook-form";
@@ -225,10 +233,14 @@ export default Form;
 ```
 
 ## **Applying Validation**
+- add `formState` if we want to show to user if the from is invalid
+- optional chaining `?.`
 
 ```
 import { FieldValues, useForm } from "react-hook-form";
 
+
+//this interface will make be popup when we type `errors.`
 interface FormData {
   name: string;
   number: number;
@@ -283,6 +295,7 @@ export default Form;
 ```
 
 ## **Schema-Based Validation with Zod**
+- `npm i @hookfrom/resolvers@latest` this one is to integrate react-hook-form with zod
 
 ![Alt text](../Images/image-37.png)
 
@@ -296,7 +309,7 @@ const schema = z.object({
   age: z.number({ invalid_type_error: "Age field is required" }).min(18),
 });
 
-type FormData = z.infer<typeof schema>;
+type FormData = z.infer<typeof schema>; //this is similar to Ts interface
 
 const Form = () => {
   const {
@@ -411,7 +424,7 @@ interface Expense {
 }
 interface Props {
   expenses: Expense[];
-  onDelete: (id: number) => void;
+  onDelete: (id: number) => void; //this is a callback function
 }
 
 const ExpenseList = ({ expenses, onDelete }: Props) => {

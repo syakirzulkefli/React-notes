@@ -3,13 +3,11 @@
 ![Alt text](../Images/image-11.png)
 
 ## **Creating a ListGroup Components**
-
 - Install Bootstrap.
 - Import Bootstrap into main.tsx file at the top.
 - Create components folder and put all components in it. (example of components such as NavBar, SideBar, MainPage)
 - Components file name is in PascalNamingConvention.
 - Define a function, give it a name and export it.
-
 ```
 //This function is named ListGroup
 //Contains h1 element and we export the component
@@ -20,9 +18,7 @@ function ListGroup () {
 
 export default ListGroup;
 ```
-
 - Then in App.tsx app component, we import it.
-
 ```
 //First import from ListGroup component
 //Then call it in JSX markup
@@ -116,7 +112,7 @@ export default ListGroup;
 
 - in react we don't have for loops. So we use mapping array.
 - So we type and pass arrow function says take each item and convert it to `<li>` element
-
+- `{items.map((item) => (<li className="list-group-item">{item}</li>))}`. We take items array and use map function to convert each item in the items array into a list of item by using arrow function.
 ```
 function ListGroup() {
   const items = ["New York", "San Francisco", "Tokyo", "London", "Paris"];
@@ -135,8 +131,7 @@ function ListGroup() {
 
 export default ListGroup;
 ```
-
-- In JSX markup only allowed to use HTML or React component,so add `{ }` to add Js syntax dynamically.
+- In JSX markup only allowed to use HTML or React component,so add curly braces `{ }` to add Js Ts syntax dynamically.
 
 `{items.map((item) => (<li>{item}</li>))}`
 
@@ -144,8 +139,7 @@ export default ListGroup;
 
 ![Alt text](../Images/image-12.png)
 
-- The warning indicates that each list item should have key properties that uniquely identifies that item. React need this to keep track of our item. So later when we add or remove item dynamically, React knows what part of the page should be updated. So when rendering a list of item using map method, we should give each item a unique key.
-
+- The warning indicates that each list item should have key properties that uniquely identifies each item. React need this to keep track of our item. So later when we add or remove item dynamically, React knows which item should be updated. So when rendering a list of item using map method, we should give each item a unique key.
 ```
 function ListGroup() {
   const items = ["New York", "San Francisco", "Tokyo", "London", "Paris"];
@@ -166,10 +160,9 @@ export default ListGroup;
 ```
 
 ## **Conditional Rendering**
-
 - Sometimes we want to render different content based on certain conditions.
 
-- This is one way, we use if statements, but occasionally it will create duplication in our code. In this code we duplicate the header `<h1>List</h1>`
+- The first way, we use if statements, but occasionally it will create duplication in our code. In this code we duplicate the header `<h1>List</h1>`
 
 ```
 function ListGroup() {
@@ -198,9 +191,7 @@ function ListGroup() {
 
 export default ListGroup;
 ```
-
-- Another way is render dynamically inside JSX expression.
-
+- The second way is render dynamically inside JSX expression.
 ```
 ListGroup.tsx
 
@@ -226,7 +217,7 @@ export default ListGroup;
 // return (); is the JSX expression
 ```
 
-- But sometimes this logic might pollute our JSX components, to solve that we extract the logic and put it in another variables or constant.
+- But sometimes this logic might pollute our JSX components `(return statement)`, to solve that we extract the logic and put it in another variables or constant.
 
 ```
 ListGroup.tsx
@@ -255,7 +246,7 @@ export default ListGroup;
 // return (); is JSX expression
 ```
 
-- Also can include inside a function and removed the constant. Benefits of using function is we can put parameter.
+- Also can include inside a function and removed the variables. Benefits of using function is we can put parameter.
 
 ```
 ListGroup.tsx
@@ -297,8 +288,7 @@ ListGroup.tsx
       //After
       {items.length === 0 && <p>No item found</p>} //use logical AND for a better syntax
 ```
-
-- This one means that if the condition is true,the result of the entire expression will be printed. If false,all the entire expression will be false and nothing will be rendered in the screen. So by this way we dont have to include ``: null` in our code.
+- This one means that if the condition is true,the result of the entire expression will be printed. If false,all the entire expression will be false and nothing will be rendered in the screen. So by this way we dont have to include `:null` in our code.
   ![Alt text](../Images/image-13.png)
 
 - Final implementation
@@ -325,46 +315,6 @@ function ListGroup() {
 export default ListGroup;
 
 // return (); is JSX expression
-```
-
-```
-ChatGPT
-
-function ListGroup() {
-  const cities = ["New York", "San Francisco", "Tokyo", "London", "Paris"];
-
-  return (
-    <>
-      <h1>List</h1>
-      {cities.length === 0 && <p>No item found</p>}
-      <ul className="list-group">
-        {cities.map((city) => (
-          <li key={city}>{city}</li>
-        ))}
-      </ul>
-    </>
-  );
-}
-
-export default ListGroup;
-
-Q : here is how i read
-
-{cities.map((city) => (<li key={city}>{city}</li>))}
-
-map the array in cities array and put it into city variables, convert it to a list of city that contains the key from city.am i right?
-
-A : Yes, you are absolutely right! Your interpretation of `{cities.map((city) => (<li key={city}>{city}</li>))}` is spot on.
-
-Here's a breakdown of how your interpretation aligns with the code:
-
-1. cities.map((city) => ...)` iterates over each element in the `cities` array, and for each element (which represents a city in this case), it performs the following:
-
-2. <li key={city}>{city}</li>` creates a list item (`<li>`) element for each city, where:
-`key={city}` uniquely identifies each list item by using the city's name as the key.
-`{city}` displays the name of the city as the content of the list item.
-
-So, you're correctly mapping the `cities` array to a list of city elements, with each city having its own key and name displayed in the list. This is a common pattern in React for rendering lists of data.
 ```
 
 ## **Handling Events**

@@ -212,6 +212,7 @@ function App() {
     // setBugs(bugs.map((bug) => (bug.id === 1 ? { ...bug, fixed: true } : bug)));
 
     //draft is a proxy object that records the changes we are going to apply to the bugs array. Draft is a copy of the bugs array and we can freely mutate or modified just like we update the Js object.
+    
     setBugs(
       produce((draft) => {
         const bug = draft.find((bug) => bug.id === 1);
