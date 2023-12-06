@@ -5,9 +5,11 @@ interface Props {
   maxChars?: number;
 }
 
-const ExpandableComponents = ({ children, maxChars = 100 }: Props) => {
+const ExpandableText = ({ children, maxChars = 100 }: Props) => {
   const [isExpanded, setExpanded] = useState(false);
-  if (children.length <= maxChars) return <p> {children}</p>;
+
+  if (children.length <= maxChars) return <p>{children}</p>;
+
   const text = isExpanded ? children : children.substring(0, maxChars);
 
   return (
@@ -20,4 +22,4 @@ const ExpandableComponents = ({ children, maxChars = 100 }: Props) => {
   );
 };
 
-export default ExpandableComponents;
+export default ExpandableText;

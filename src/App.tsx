@@ -1,18 +1,95 @@
-import { useState } from "react";
-import Alert2 from "./components/Button/Alert2";
-import Button2 from "./components/Button/Button1";
+import { useEffect, useState } from "react";
+import { CanceledError } from "./F5/services/api-client";
+import userService, { User } from "./F5/services/user-service";
 
 function App() {
-  const [alertVisible, setAlertVisibility] = useState(false);
+  const [users, setUsers] = useState<User[]>([]);
+  const [error, setError] = useState("");
+  const [isLoading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    const { request, cancel } = userService.getAll<User>(); //fetch
+    request
+      .then((res) => {
+        setUsers(res.data);
+        setLoading(false);
+      }) //response
+      .catch((err) => {
+        if (err instanceof CanceledError) return;
+        setError(err.message);
+        setLoading(false);
+      }); //error
+
+    return () => cancel(); //cancel fetch request
+  }, []);
+
+  const deleteUser = (user: User) => {
+    const originalUsers = [...users];
+    setUsers(users.filter((u) => u.id !== user.id));
+
+    userService.delete(user.id).catch((err) => {
+      setError(err.message);
+      setUsers(originalUsers);
+    });
+  };
+
+  const addUser = () => {
+    const originalUsers = [...users];
+    const newUser = { id: 0, name: "Syakir" };
+    setUsers([newUser, ...users]);
+
+    userService
+      .create(newUser)
+      .then((res) => setUsers([res.data, ...users]))
+      .catch((err) => {
+        setError(err.message);
+        setUsers(originalUsers);
+      });
+  };
+
+  const updateUser = (user: User) => {
+    const originalUsers = [...users];
+    const updatedUser = { ...user, name: user.name + "!" };
+    setUsers(users.map((u) => (u.id === user.id ? updatedUser : u)));
+
+    userService.update(updatedUser).catch((err) => {
+      setError(err.message);
+      setUsers(originalUsers);
+    });
+  };
 
   return (
     <>
-      {alertVisible === true && (
-        <Alert2 onClose={() => setAlertVisibility(false)}>Please Close</Alert2>
-      )}
-      <Button2 color="success" onClick={() => setAlertVisibility(true)}>
-        Button
-      </Button2>
+      {error && <p className="text-danger">{error}</p>}
+      {isLoading && <div className="spinner-border"></div>}
+      <button className="btn btn-primary mb-3" onClick={addUser}>
+        Add
+      </button>
+      <ul className="list-group">
+        {users.map((user) => (
+          <li
+            key={user.id}
+            className="list-group-item d-flex justify-content-between"
+          >
+            {user.name}
+            <div>
+              <button
+                className="btn btn-outline-secondary mx-1"
+                onClick={() => updateUser(user)}
+              >
+                Update
+              </button>
+              <button
+                className="btn btn-outline-danger"
+                onClick={() => deleteUser(user)}
+              >
+                Delete
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
     </>
   );
 }

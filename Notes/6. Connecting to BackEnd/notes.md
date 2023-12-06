@@ -1,6 +1,6 @@
 ## **Understanding The Effect Hook**
 
-![Alt text](image.png)
+![Alt text](../Images/image-38.png)
 
 ```
 import { useEffect, useRef } from "react";
